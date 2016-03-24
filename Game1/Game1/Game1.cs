@@ -22,9 +22,6 @@ namespace Game1
         Shooter shooter = new HumanShooter();
 
 
-
-
-
         internal Game1()
         {
             graphics = new GraphicsDeviceManager(this);

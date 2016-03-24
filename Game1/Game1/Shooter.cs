@@ -59,12 +59,12 @@ namespace Game1
         internal void Draw(SpriteBatch spritebatch)
         {
             spritebatch.Draw(shooterText, Pos, Color.White);
-            Vector2 origin = new Vector2(bulletText.Width / 2f, bulletText.Height / 2f);
+            Vector2 origin = new Vector2(bulletText.Bounds.Center.X, bulletText.Bounds.Center.Y);
             foreach (Bullet bull in bullets)
             {
                 spritebatch.Draw(bulletText, bull.Pos,
-                    null, Color.White, (float)(bull.Angle * 180/Math.PI), Vector2.Zero, 1.0f, SpriteEffects.None, 1.0f);
-               // spritebatch.Draw(bulletText, bull.Pos, Color.White);
+                    null, Color.White, (bull.Angle + (float)(Math.PI*.5f)), origin, 1.0f, SpriteEffects.None, 0f);
+                // spritebatch.Draw(bulletText, bull.Pos, Color.White);
             }
         }
     }

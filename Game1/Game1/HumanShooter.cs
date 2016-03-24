@@ -39,7 +39,7 @@ namespace Game1
                     bullets.RemoveAt(i);
                 }
             }
-            Hitbox = new Rectangle((int)Pos.X, (int)Pos.Y, shooterText.Width, shooterText.Height);
+            Hitbox = new Circle(new Vector2(shooterText.Bounds.Center.X,shooterText.Bounds.Center.Y),shooterText.Width);
         }
 
 
