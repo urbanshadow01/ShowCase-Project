@@ -53,7 +53,8 @@ namespace Game1
 
             Pos += new Vector2((float)(Velocity.X * gametime.ElapsedGameTime.TotalSeconds),
                  (float)(Velocity.Y * gametime.ElapsedGameTime.TotalSeconds));
-            Hitbox = new Circle(new Vector2(runnerText.Bounds.Center.X, runnerText.Bounds.Center.Y), runnerText.Width);
+            runnerSprite.Position = Pos;
+           // Hitbox = new Circle(new Vector2(runnerText.Bounds.Center.X, runnerText.Bounds.Center.Y), runnerText.Width);
             if (Velocity.X > 0)
             {
                 Velocity.X -= (float)(Friction * gametime.ElapsedGameTime.TotalSeconds);

@@ -18,6 +18,12 @@ namespace Game1
         protected Vector2 MinVelocity = new Vector2(-200, -200);
         protected int Friction = 10;
         internal Texture2D runnerText;
+        internal Sprite runnerSprite;
+        
+        internal Runner()
+        {
+            runnerSprite = new Sprite(runnerText);
+        }
         internal abstract void Update(GameTime gametime);
         internal void LoadContent(ContentManager Content)
         {

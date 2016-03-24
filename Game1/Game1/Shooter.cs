@@ -16,13 +16,17 @@ namespace Game1
     {
 
         protected List<Bullet> bullets = new List<Bullet>();
+        protected List<Sprite> bulletSprites = new List<Sprite>();
         internal Texture2D shooterText;
         internal Texture2D bulletText;
         protected double coolDown = 0;
+        internal Sprite shooterSprite;
         internal Shooter()
         {
             bullets.Clear();
             Pos = new Vector2(300, 300);
+            shooterSprite = new Sprite(shooterText);
+            shooterSprite.Position = Pos;
         }
 
         internal abstract void Update(GameTime gametime);
@@ -37,7 +41,7 @@ namespace Game1
             float velocityX = (float)(Math.Cos(Angle) * bulletSpeed);
             float velocityY = (float)(Math.Sin(Angle) * bulletSpeed);
 
-
+            bulletSprites.Add(new Sprite(bulletText));
             return new Bullet(new Vector2(velocityX, velocityY), false, Angle);
         }
         internal bool Win(Runner run)

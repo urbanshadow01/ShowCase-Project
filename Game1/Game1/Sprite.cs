@@ -15,16 +15,11 @@ namespace Game1
     {
         internal Vector2 Position;
         internal Texture2D Texture;
-        internal float Alpha = 0;
+        private float Alpha = 0;
 
         internal Sprite(Texture2D texture)
         {
             this.Texture = texture;
-        }
-
-        internal void Draw(SpriteBatch sp)
-        {
-            sp.Draw(Texture, Position, null, Color.White);
         }
 
         internal bool CollidesWith(Sprite other)
@@ -38,12 +33,12 @@ namespace Game1
             // Get dimensions of texture
             int widthOther = other.Texture.Width;
             int heightOther = other.Texture.Height;
-            int widthMe = Texture.Width;
-            int heightMe = Texture.Height;
+            int widthThis = Texture.Width;
+            int heightThis = Texture.Height;
 
             if (calcPerPixel &&                                // if we need per pixel
                 ((Math.Min(widthOther, heightOther) > 100) ||  // at least avoid doing it
-                (Math.Min(widthMe, heightMe) > 100)))          // for small sizes (nobody will notice :P)
+                (Math.Min(widthThis, heightThis) > 100)))          // for small sizes (nobody will notice :P)
             {
                 return Bounds.Intersects(other.Bounds) // If simple intersection fails, don't even bother with per-pixel
                     && PerPixelCollision(this, other);
