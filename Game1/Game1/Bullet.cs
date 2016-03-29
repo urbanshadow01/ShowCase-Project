@@ -42,7 +42,7 @@ namespace Game1
             }
             //Hit();
         }
-        internal bool Hit(Runner run)
+       /* internal bool Hit(Runner run)
         {
 
             if (this.Hitbox.Intersects(run.Hitbox))
@@ -53,7 +53,7 @@ namespace Game1
             {
                 return false;
             }
-        }
+        } */
 
     }
 }

@@ -25,8 +25,8 @@ namespace Game1
         {
             bullets.Clear();
             Pos = new Vector2(300, 300);
-            shooterSprite = new Sprite(shooterText);
-            shooterSprite.Position = Pos;
+            
+            
         }
 
         internal abstract void Update(GameTime gametime);
@@ -34,6 +34,8 @@ namespace Game1
         {
             shooterText = Content.Load<Texture2D>("player1");
             bulletText = Content.Load<Texture2D>("bullet");
+            shooterSprite = new Sprite(shooterText);
+            shooterSprite.Position = Pos;
         }
         internal Bullet shoot(float Angle)
         {
@@ -46,9 +48,9 @@ namespace Game1
         }
         internal bool Win(Runner run)
         {
-            foreach (Bullet bull in bullets)
+            foreach (Sprite bull in bulletSprites)
             {
-                if (bull.Hit(run))
+                if (bull.CollidesWith(run.runnerSprite))
                 {
                     return true;
                 }

@@ -27,16 +27,15 @@ namespace Game1
                 coolDown = 1;
             }
             coolDown -= 1 * gametime.ElapsedGameTime.TotalSeconds;
+
             int bulletCount = 0;
             foreach (Bullet bullet in bullets)
             {
                 bullet.Update(gametime, bulletText);
-                bulletSprites.
+                bulletSprites[bulletCount].Position = bullet.Pos;
+                bulletCount++;
             }
-            foreach (Sprite sprite in bulletSprites)
-            {
-                sprite.Position = Vector2.Zero;
-            }
+
             for (int i = bullets.Count - 1; i >= 0; i--)
             {
                 Bullet bullet = bullets.ElementAt(i);

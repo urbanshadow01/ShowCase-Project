@@ -22,12 +22,13 @@ namespace Game1
         
         internal Runner()
         {
-            runnerSprite = new Sprite(runnerText);
+            
         }
         internal abstract void Update(GameTime gametime);
         internal void LoadContent(ContentManager Content)
         {
             runnerText = Content.Load<Texture2D>("player2");
+            runnerSprite = new Sprite(runnerText);
         }
         internal void Draw(SpriteBatch spritebatch)
         {
@@ -35,7 +36,7 @@ namespace Game1
         }
         internal bool Win(Shooter shooter)
         {
-            if (Hitbox.Intersects(shooter.Hitbox))
+            if (runnerSprite.CollidesWith(shooter.shooterSprite))
             {
                 return true;
             }
