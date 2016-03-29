@@ -38,7 +38,7 @@ namespace Game1
 
             if (calcPerPixel &&                                // if we need per pixel
                 ((Math.Min(widthOther, heightOther) > 100) ||  // at least avoid doing it
-                (Math.Min(widthThis, heightThis) > 100)))          // for small sizes (nobody will notice :P)
+                (Math.Min(widthThis, heightThis) > 100)))          // for small sizes
             {
                 return Bounds.Intersects(other.Bounds) // If simple intersection fails, don't even bother with per-pixel
                     && PerPixelCollision(this, other);
@@ -56,16 +56,15 @@ namespace Game1
             b.Texture.GetData(bitsB);
 
             // Calculate the intersecting rectangle
-            int x1 = Math.Max(a.Bounds.X, b.Bounds.X);
-            int x2 = Math.Min(a.Bounds.X + a.Bounds.Width, b.Bounds.X + b.Bounds.Width);
-
-            int y1 = Math.Max(a.Bounds.Y, b.Bounds.Y);
-            int y2 = Math.Min(a.Bounds.Y + a.Bounds.Height, b.Bounds.Y + b.Bounds.Height);
+            int top = Math.Max(a.Bounds.Top, b.Bounds.Top);
+            int bottom = Math.Min(a.Bounds.Bottom, b.Bounds.Bottom);
+            int left = Math.Max(a.Bounds.Left, b.Bounds.Left);
+            int right = Math.Min(a.Bounds.Right, b.Bounds.Right);
 
             // For each single pixel in the intersecting rectangle
-            for (int y = y1; y < y2; ++y)
+            for (int y = top; y < bottom; y++)
             {
-                for (int x = x1; x < x2; ++x)
+                for (int x = left; x < right; x++)
                 {
                     // Get the color from each texture
                     Color spriteA = bitsA[(x - a.Bounds.X) + (y - a.Bounds.Y) * a.Texture.Width];
@@ -81,7 +80,7 @@ namespace Game1
             return false;
         }
 
-        private Rectangle bounds = Rectangle.Empty;
+       // private Rectangle bounds = Rectangle.Empty;
         internal virtual Rectangle Bounds
         {
             get
@@ -92,7 +91,6 @@ namespace Game1
                     Texture.Width,
                     Texture.Height);
             }
-
         }
     }
 }

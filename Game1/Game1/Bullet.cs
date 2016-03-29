@@ -16,11 +16,12 @@ namespace Game1
         protected Vector2 Velocity;
         internal Vector2 Pos = new Vector2(300, 300);
         internal bool Remove { get; set; }
-        internal Circle Hitbox { get; set; }
+        internal BoundingSphere Hitbox { get; set; }
         internal float Angle;
        // internal Texture2D bulletText { get; set; }
         internal Bullet(Vector2 Velocity1, bool remov, float Angle1)
         {
+            
             Velocity = Velocity1;
             Remove = remov;
             this.Angle = Angle1;
@@ -42,7 +43,7 @@ namespace Game1
             }
             //Hit();
         }
-       /* internal bool Hit(Runner run)
+        internal bool Hit(Runner run)
         {
 
             if (this.Hitbox.Intersects(run.Hitbox))
@@ -53,7 +54,7 @@ namespace Game1
             {
                 return false;
             }
-        } */
+        } 
 
     }
 }
