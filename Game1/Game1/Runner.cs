@@ -19,10 +19,10 @@ namespace Game1
         protected int Friction = 10;
         internal Texture2D runnerText;
         internal Sprite runnerSprite;
-        
+
         internal Runner()
         {
-            
+
         }
         internal abstract void Update(GameTime gametime);
         internal void LoadContent(ContentManager Content)

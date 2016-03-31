@@ -74,7 +74,7 @@ namespace Game1
             spriteBatch.Begin();
             shooter.Draw(spriteBatch);
             runner.Draw(spriteBatch);
-            spriteBatch.DrawString(font,"", new Vector2(600, 200), Color.Violet);
+            spriteBatch.DrawString(font, "", new Vector2(600, 200), Color.Violet);
             spriteBatch.End();
             base.Draw(gameTime);
         }

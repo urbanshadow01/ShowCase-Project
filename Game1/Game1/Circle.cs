@@ -11,7 +11,8 @@ namespace Game1
         public Vector2 Center { get; set; }
         public float Radius { get; set; }
 
-        public Circle(Vector2 center, float radius) : this()
+        public Circle(Vector2 center, float radius)
+            : this()
         {
             Center = center;
             Radius = radius;
@@ -27,4 +28,4 @@ namespace Game1
             return ((other.Center - Center).Length() < (other.Radius - Radius));
         }
     }
-} 
+}

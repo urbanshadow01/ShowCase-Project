@@ -17,11 +17,12 @@ namespace Game1
         internal Vector2 Pos = new Vector2(300, 300);
         internal bool Remove { get; set; }
         internal BoundingSphere Hitbox { get; set; }
+        internal Matrix BulletTransform;
         internal float Angle;
-       // internal Texture2D bulletText { get; set; }
+        // internal Texture2D bulletText { get; set; }
         internal Bullet(Vector2 Velocity1, bool remov, float Angle1)
         {
-            
+
             Velocity = Velocity1;
             Remove = remov;
             this.Angle = Angle1;
@@ -31,8 +32,7 @@ namespace Game1
         {
             Pos += new Vector2((float)(Velocity.X * gametime.ElapsedGameTime.TotalSeconds),
                 (float)(Velocity.Y * gametime.ElapsedGameTime.TotalSeconds));//Changes pos of bullet based on velocity.
-           
-          //  this.Hitbox = new Circle(new Vector2(bulletText.Bounds.Center.X, bulletText.Bounds.Center.Y), 5);
+
             if (Pos.X < -200 || Pos.X > 600) //300 = max window X
             {
                 Remove = true;
@@ -41,20 +41,13 @@ namespace Game1
             {
                 Remove = true;
             }
-            //Hit();
+            BulletTransform =
+                      Matrix.CreateTranslation(new Vector3(-(new Vector2(bulletText.Width / 2, bulletText.Height / 2)), 0.0f)) *
+                // Matrix.CreateScale(Scale) *  scale would go here
+                      Matrix.CreateRotationZ(Angle) *
+                      Matrix.CreateTranslation(new Vector3(Pos, 0.0f));
         }
-        internal bool Hit(Runner run)
-        {
 
-            if (this.Hitbox.Intersects(run.Hitbox))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        } 
 
     }
 }
