@@ -14,7 +14,7 @@ namespace Game1
     class Menu
     {
         private MouseState oldState;
-        private bool OnMenu = true;
+        private bool OnMenu = false;
         internal bool GetIsMenu { get { return OnMenu; } }
         internal void LoadContent(ContentManager Content)
         {
