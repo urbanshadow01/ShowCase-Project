@@ -14,10 +14,10 @@ namespace Game1
     class Bullet
     {
         protected Vector2 Velocity;
-        internal Vector2 Pos = new Vector2(300, 300);
+        internal Vector2 GetVelocity { get { return Velocity; } }
+        internal Vector2 Pos = new Vector2(500, 400);
         internal bool Remove { get; set; }
         internal BoundingSphere Hitbox { get; set; }
-        internal Matrix BulletTransform;
         internal float Angle;
         // internal Texture2D bulletText { get; set; }
         internal Bullet(Vector2 Velocity1, bool remov, float Angle1)
@@ -41,11 +41,6 @@ namespace Game1
             {
                 Remove = true;
             }
-            BulletTransform =
-                      Matrix.CreateTranslation(new Vector3(-(new Vector2(bulletText.Width / 2, bulletText.Height / 2)), 0.0f)) *
-                // Matrix.CreateScale(Scale) *  scale would go here
-                      Matrix.CreateRotationZ(Angle) *
-                      Matrix.CreateTranslation(new Vector3(Pos, 0.0f));
         }
 
 

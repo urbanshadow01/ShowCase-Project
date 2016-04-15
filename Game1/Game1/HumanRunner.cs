@@ -12,10 +12,12 @@ namespace Game1
     class HumanRunner : Runner
     {
 
-        internal HumanRunner()
+        internal HumanRunner(Texture2D runnerText)
         {
             Pos = new Vector2(100, 100);
             Velocity = new Vector2(0, 0);
+            this.runnerText = runnerText;
+            runnerSprite = new Sprite(runnerText);
         }
 
         internal override void Update(GameTime gametime)
@@ -54,6 +56,7 @@ namespace Game1
             Pos += new Vector2((float)(Velocity.X * gametime.ElapsedGameTime.TotalSeconds),
                  (float)(Velocity.Y * gametime.ElapsedGameTime.TotalSeconds));
             runnerSprite.Position = Pos;
+            runnerSprite.transform = Matrix.CreateTranslation(new Vector3(Pos, 0f));
             // Hitbox = new Circle(new Vector2(runnerText.Bounds.Center.X, runnerText.Bounds.Center.Y), runnerText.Width);
             if (Velocity.X > 0)
             {
@@ -72,5 +75,7 @@ namespace Game1
                 Velocity.Y += (float)(Friction * gametime.ElapsedGameTime.TotalSeconds);
             }
         }
+        internal override void Update(GameTime gametime, Shooter shooter) { }
+
     }
 }

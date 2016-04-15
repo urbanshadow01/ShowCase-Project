@@ -16,11 +16,15 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        internal Texture2D shooterText;
+        internal Texture2D bulletText;
+        internal Texture2D runnerText;
         SpriteFont font;
-        Runner runner = new HumanRunner();
-        Shooter shooter = new HumanShooter();
-
+        Runner runner;
+        Shooter shooter;
+        Menu menu = new Menu();
+        bool runnerAI = true;
+        bool shooterAI = false;
 
         internal Game1()
         {
@@ -40,9 +44,8 @@ namespace Game1
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            runnerText = Content.Load<Texture2D>("player2");
 
-            shooter.LoadContent(Content);
-            runner.LoadContent(Content);
             font = Content.Load<SpriteFont>("myFont");
         }
 
@@ -54,15 +57,36 @@ namespace Game1
 
         protected override void Update(GameTime gameTime)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            {
+                runner = new AIRunner(runnerText);
+                shooter = new HumanShooter(Content);
+            }
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
             }
-            if (!runner.Win(shooter) && !shooter.Win(runner))
+            if (runner != null || shooter != null)
             {
-                runner.Update(gameTime);
-                shooter.Update(gameTime);
-
+                if (!runner.Win(shooter) && !shooter.Win(runner))
+                {
+                    if (runnerAI)
+                    {
+                        runner.Update(gameTime, shooter);
+                    }
+                    else
+                    {
+                        runner.Update(gameTime);
+                    }
+                    if (shooterAI)
+                    {
+                        shooter.Update(gameTime, runner);
+                    }
+                    else
+                    {
+                        shooter.Update(gameTime);
+                    }
+                }
             }
             base.Update(gameTime);
         }
@@ -72,9 +96,14 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            shooter.Draw(spriteBatch);
-            runner.Draw(spriteBatch);
-            spriteBatch.DrawString(font, "", new Vector2(600, 200), Color.Violet);
+            if (!menu.GetIsMenu)
+            {
+                if (shooter != null || runner != null)
+                {
+                    shooter.Draw(spriteBatch);
+                    runner.Draw(spriteBatch);
+                } 
+            }
             spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -16,25 +16,24 @@ namespace Game1
         internal Vector2 Position;
         internal Texture2D Texture;
         private float Alpha = 0;
-
+        internal Matrix transform { get; set; }
         internal Sprite(Texture2D texture)
         {
             this.Texture = texture;
         }
 
-        internal bool CollidesWith(Sprite other, bool transform)
+        internal bool CollidesWith(Sprite other, bool transformed)
         {
             // Default behavior uses per-pixel collision detection
 
-            if (!transform)
+            if (!transformed)
             {
                 return CollidesWith(other);
             }
             else
             {
-                return transCollidesPixels()
+                return transCollidesPixels(transform, this, other);
             }
-            
         }
 
         internal bool CollidesWith(Sprite other)
@@ -45,7 +44,7 @@ namespace Game1
             int widthThis = Texture.Width;
             int heightThis = Texture.Height;
 
-            if (((Math.Min(widthOther, heightOther) > 100) ||  (Math.Min(widthThis, heightThis) > 100)))         
+            if (((Math.Min(widthOther, heightOther) > 100) || (Math.Min(widthThis, heightThis) > 100)))
             {
                 return Bounds.Intersects(other.Bounds) // If simple intersection fails, don't even bother with per-pixel
                     && PerPixelCollision(this, other);
@@ -53,24 +52,7 @@ namespace Game1
 
             return Bounds.Intersects(other.Bounds);
         }
-        internal bool CollidesWith(Sprite other, bool calcPerPixel)
-        {
-            // Get dimensions of texture
-            int widthOther = other.Texture.Width;
-            int heightOther = other.Texture.Height;
-            int widthThis = Texture.Width;
-            int heightThis = Texture.Height;
 
-            if (calcPerPixel &&                                // if we need per pixel
-                ((Math.Min(widthOther, heightOther) > 100) ||  // at least avoid doing it
-                (Math.Min(widthThis, heightThis) > 100)))          // for small sizes
-            {
-                return Bounds.Intersects(other.Bounds) // If simple intersection fails, don't even bother with per-pixel
-                    && PerPixelCollision(this, other);
-            }
-
-            return Bounds.Intersects(other.Bounds);
-        }
         #region perPixelNonTransformed
         static bool PerPixelCollision(Sprite a, Sprite b)
         {
@@ -108,10 +90,11 @@ namespace Game1
         #region transPixelCheck
         public static bool transCollidesPixels(
                            Matrix transformA, Sprite a,
-                           Matrix transformB, Sprite b)
+                           Sprite b)
         {
             // Calculate a matrix which transforms from A's local space into
             // world space and then into B's local space
+            Matrix transformB = b.transform;
             Matrix transformAToB = transformA * Matrix.Invert(transformB);
             int heightA = a.Texture.Height;
             int widthA = a.Texture.Width;

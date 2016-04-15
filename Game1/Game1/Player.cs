@@ -12,7 +12,6 @@ namespace Game1
     abstract class Player
     {
         internal Vector2 Pos { get; set; }
-        internal Circle Hitbox { get; set; }
         internal Player()
         {
 
