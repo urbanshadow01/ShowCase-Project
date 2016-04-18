@@ -18,14 +18,71 @@ namespace Game1
         {
             coolDown = 0;
             bullets.Clear();
-            this.Pos = new Vector2(500, 400);
+            this.Pos = new Vector2(500, 1200);
             base.LoadContent(Content);
             shooterSprite = new Sprite(shooterText);
             shooterSprite.Position = Pos;
+            MaxVelocity = new Vector2(100, 100);
+            MinVelocity = new Vector2(-100, -100);
+            Friction = 5;
         }
 
         internal override void Update(GameTime gametime)
         {
+            shooterSprite.Position = this.Pos;
+            #region movement
+            KeyboardState keyboard = Keyboard.GetState();
+            if (keyboard.IsKeyDown(Keys.Right))
+            {
+                if (Velocity.X < MaxVelocity.X)
+                {
+                    Velocity.X += 25;
+                }
+            }
+            if (keyboard.IsKeyDown(Keys.Left))
+            {
+                if (Velocity.X > MinVelocity.X)
+                {
+                    Velocity.X -= 25;
+                }
+            }
+            if (keyboard.IsKeyDown(Keys.Down))
+            {
+                if (Velocity.Y < MaxVelocity.Y)
+                {
+                    Velocity.Y += 25;
+                }
+            }
+            if (keyboard.IsKeyDown(Keys.Up))
+            {
+                if (Velocity.Y > MinVelocity.Y)
+                {
+                    Velocity.Y -= 25;
+                }
+            }
+            Pos += new Vector2((float)(Velocity.X * gametime.ElapsedGameTime.TotalSeconds),
+     (float)(Velocity.Y * gametime.ElapsedGameTime.TotalSeconds));
+            shooterSprite.Position = this.Pos;
+            shooterSprite.transform = Matrix.CreateTranslation(new Vector3(Pos, 0f));
+
+            if (Velocity.X > 0)
+            {
+                Velocity.X -= (float)(Friction * gametime.ElapsedGameTime.TotalSeconds);
+            }
+            if (Velocity.Y > 0)
+            {
+                Velocity.Y -= (float)(Friction * gametime.ElapsedGameTime.TotalSeconds);
+            }
+            if (Velocity.X < 0)
+            {
+                Velocity.X += (float)(Friction * gametime.ElapsedGameTime.TotalSeconds);
+            }
+            if (Velocity.Y < 0)
+            {
+                Velocity.Y += (float)(Friction * gametime.ElapsedGameTime.TotalSeconds);
+            }
+            #endregion
+            #region shoot
             MouseState mouseState = Mouse.GetState();
             if (mouseState.LeftButton == ButtonState.Pressed && coolDown <= 0)
             {
@@ -34,7 +91,8 @@ namespace Game1
                 coolDown = 1;
             }
             coolDown -= 1 * gametime.ElapsedGameTime.TotalSeconds;
-
+            #endregion
+            #region bulletUpdates
             int bulletCount = 0;
             foreach (Bullet bullet in bullets)
             {
@@ -47,7 +105,7 @@ namespace Game1
                     
                 bulletCount++;
             }
-
+            
             for (int i = bullets.Count - 1; i >= 0; i--)
             {
                 Bullet bullet = bullets.ElementAt(i);
@@ -57,6 +115,7 @@ namespace Game1
                     bullets.RemoveAt(i);
                 }
             }
+            #endregion
             //Hitbox = new Circle(new Vector2(shooterText.Bounds.Center.X,shooterText.Bounds.Center.Y),shooterText.Width);
         }
         internal override void Update(GameTime gametime, Runner run)

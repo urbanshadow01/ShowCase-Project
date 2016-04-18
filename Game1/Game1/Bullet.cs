@@ -15,17 +15,17 @@ namespace Game1
     {
         protected Vector2 Velocity;
         internal Vector2 GetVelocity { get { return Velocity; } }
-        internal Vector2 Pos = new Vector2(500, 400);
+        internal Vector2 Pos = new Vector2(500, 1200);
         internal bool Remove { get; set; }
         internal BoundingSphere Hitbox { get; set; }
         internal float Angle;
         // internal Texture2D bulletText { get; set; }
-        internal Bullet(Vector2 Velocity1, bool remov, float Angle1)
+        internal Bullet(Vector2 Velocity1, bool remov, float Angle1,Vector2 Pos)
         {
-
             Velocity = Velocity1;
             Remove = remov;
             this.Angle = Angle1;
+            this.Pos = Pos;
         }
 
         internal void Update(GameTime gametime, Texture2D bulletText)

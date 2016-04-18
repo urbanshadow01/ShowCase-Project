@@ -17,18 +17,14 @@ namespace Game1
 
         protected List<Bullet> bullets = new List<Bullet>();
         protected List<Sprite> bulletSprites = new List<Sprite>();
-        protected Texture2D shooterText;
-        protected Texture2D bulletText;
+        internal Texture2D shooterText;
+        internal Texture2D bulletText;
         protected double coolDown = 1;
         internal Sprite shooterSprite;
         internal Shooter()
         {
         }
-        internal Shooter(Texture2D bullText, Texture2D shootText)
-        {
-            shooterText = shootText;
-            bulletText = bullText;
-        }
+
         internal void LoadContent(ContentManager Content)
         {
             shooterText = Content.Load<Texture2D>("player1");
@@ -44,7 +40,7 @@ namespace Game1
             float velocityY = (float)(Math.Sin(Angle) * bulletSpeed);
 
             bulletSprites.Add(new Sprite(bulletText));
-            return new Bullet(new Vector2(velocityX, velocityY), false, Angle);
+            return new Bullet(new Vector2(velocityX, velocityY), false, Angle,Pos);
         }
         internal bool Win(Runner run)
         {

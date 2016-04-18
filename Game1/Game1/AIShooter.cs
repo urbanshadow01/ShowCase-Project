@@ -16,7 +16,7 @@ namespace Game1
         {
             coolDown = 1;
             bullets.Clear();
-            this.Pos = new Vector2(600, 300);
+            this.Pos = new Vector2(500, 1200);
             bulletText = bulletText;
             shooterText = shootText;
             shooterSprite = new Sprite(shooterText);
@@ -25,7 +25,7 @@ namespace Game1
 
         internal override void Update(GameTime gametime, Runner run)
         {
-
+            shooterSprite.Position = this.Pos;
             if (coolDown <= 0)
             {
                 float Angle = (float)(Math.Atan2(run.Pos.Y - Pos.Y, run.Pos.X - Pos.X));

@@ -13,11 +13,7 @@ namespace Game1
 {
     abstract class Runner : Player
     {
-        internal Vector2 GetVelocity { get { return Velocity; } }
-        protected Vector2 Velocity;
-        protected Vector2 MaxVelocity = new Vector2(200, 200);
-        protected Vector2 MinVelocity = new Vector2(-200, -200);
-        protected int Friction = 10;
+
         internal Texture2D runnerText;
         internal Sprite runnerSprite;
 
