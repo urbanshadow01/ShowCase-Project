@@ -16,7 +16,7 @@ namespace Game1
 
         internal HumanShooter(ContentManager Content)
         {
-            coolDown = 0;
+            coolDown = 1;
             bullets.Clear();
             this.Pos = new Vector2(500, 1200);
             base.LoadContent(Content);
@@ -24,7 +24,7 @@ namespace Game1
             shooterSprite.Position = Pos;
             MaxVelocity = new Vector2(100, 100);
             MinVelocity = new Vector2(-100, -100);
-            Friction = 5;
+            Friction = 2.5f;
         }
 
         internal override void Update(GameTime gametime)
@@ -67,19 +67,19 @@ namespace Game1
 
             if (Velocity.X > 0)
             {
-                Velocity.X -= (float)(Friction * gametime.ElapsedGameTime.TotalSeconds);
+                Velocity.X -= (float)(Friction);
             }
             if (Velocity.Y > 0)
             {
-                Velocity.Y -= (float)(Friction * gametime.ElapsedGameTime.TotalSeconds);
+                Velocity.Y -= (float)(Friction);
             }
             if (Velocity.X < 0)
             {
-                Velocity.X += (float)(Friction * gametime.ElapsedGameTime.TotalSeconds);
+                Velocity.X += (float)(Friction);
             }
             if (Velocity.Y < 0)
             {
-                Velocity.Y += (float)(Friction * gametime.ElapsedGameTime.TotalSeconds);
+                Velocity.Y += (float)(Friction);
             }
             #endregion
             #region shoot
@@ -98,14 +98,14 @@ namespace Game1
             {
                 bullet.Update(gametime, bulletText);
                 bulletSprites[bulletCount].Position = bullet.Pos;
-                bulletSprites[bulletCount].transform = 
-                    Matrix.CreateTranslation(new Vector3(-(new Vector2(bulletText.Width/2,bulletText.Height/2)),0f)) *
-                    Matrix.CreateRotationZ(bullet.Angle + (float)Math.PI*.5f) *
-                    Matrix.CreateTranslation(new Vector3(bullet.Pos,0f));
-                    
+                bulletSprites[bulletCount].transform =
+                    Matrix.CreateTranslation(new Vector3(-(new Vector2(bulletText.Width / 2, bulletText.Height / 2)), 0f)) *
+                    Matrix.CreateRotationZ(bullet.Angle + (float)Math.PI * .5f) *
+                    Matrix.CreateTranslation(new Vector3(bullet.Pos, 0f));
+
                 bulletCount++;
             }
-            
+
             for (int i = bullets.Count - 1; i >= 0; i--)
             {
                 Bullet bullet = bullets.ElementAt(i);

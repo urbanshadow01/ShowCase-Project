@@ -66,9 +66,9 @@ namespace Game1
 
         protected override void Update(GameTime gameTime)
         {
-//            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-  //          myBackground.Update(elapsed * 100);
+            //          myBackground.Update(elapsed * 100);
 
 
             if (Keyboard.GetState().IsKeyDown(Keys.R))
@@ -124,7 +124,7 @@ namespace Game1
                 {
                     shooter.Draw(spriteBatch);
                     runner.Draw(spriteBatch);
-                } 
+                }
             }
             spriteBatch.End();
             base.Draw(gameTime);

@@ -40,7 +40,7 @@ namespace Game1
             float velocityY = (float)(Math.Sin(Angle) * bulletSpeed);
 
             bulletSprites.Add(new Sprite(bulletText));
-            return new Bullet(new Vector2(velocityX, velocityY), false, Angle,Pos);
+            return new Bullet(new Vector2(velocityX, velocityY), false, Angle, Pos);
         }
         internal bool Win(Runner run)
         {
@@ -61,14 +61,14 @@ namespace Game1
         internal void Draw(SpriteBatch spritebatch)
         {
 
-                spritebatch.Draw(shooterText, Pos, Color.White);
-                Vector2 origin = new Vector2(bulletText.Bounds.Center.X, bulletText.Bounds.Center.Y);
-                foreach (Bullet bull in bullets)
-                {
-                    spritebatch.Draw(bulletText, bull.Pos,
-                        null, Color.White, (bull.Angle + (float)(Math.PI * .5f)), origin, 1.0f, SpriteEffects.None, 0f);
-                    // spritebatch.Draw(bulletText, bull.Pos, Color.White);
-                }
+            spritebatch.Draw(shooterText, Pos, Color.White);
+            Vector2 origin = new Vector2(bulletText.Bounds.Center.X, bulletText.Bounds.Center.Y);
+            foreach (Bullet bull in bullets)
+            {
+                spritebatch.Draw(bulletText, bull.Pos,
+                    null, Color.White, (bull.Angle + (float)(Math.PI * .5f)), origin, 1.0f, SpriteEffects.None, 0f);
+                // spritebatch.Draw(bulletText, bull.Pos, Color.White);
+            }
         }
     }
 

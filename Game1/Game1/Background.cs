@@ -15,7 +15,7 @@ namespace Game1
         private Vector2 screenpos, origin, texturesize;
         private Texture2D mytexture;
         private int screenheight;
-        public void Load(GraphicsDevice device, Texture2D backgroundTexture)
+        internal void LoadContent(GraphicsDevice device, Texture2D backgroundTexture)
         {
             mytexture = backgroundTexture;
             screenheight = device.Viewport.Height;
@@ -29,13 +29,13 @@ namespace Game1
             texturesize = new Vector2(0, mytexture.Height);
         }
         // ScrollingBackground.Update
-        public void Update(float deltaY)
+        internal void Update(float deltaY)
         {
             screenpos.Y += deltaY;
             screenpos.Y = screenpos.Y % mytexture.Height;
         }
         // ScrollingBackground.Draw
-        public void Draw(SpriteBatch batch)
+        internal void Draw(SpriteBatch batch)
         {
             // Draw the texture, if it is still onscreen.
             if (screenpos.Y < screenheight)
