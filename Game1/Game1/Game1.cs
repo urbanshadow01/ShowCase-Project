@@ -73,7 +73,7 @@ namespace Game1
 
             if (Keyboard.GetState().IsKeyDown(Keys.R))
             {
-                runner = new HumanRunner(runnerText);
+                runner = new HumanRunner(Content);
                 shooter = new HumanShooter(Content);
             }
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
