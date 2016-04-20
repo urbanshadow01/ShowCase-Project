@@ -21,6 +21,7 @@ namespace Game1
         Runner runner;
         Shooter shooter;
         Menu menu = new Menu();
+        Walls walls = new Walls();
         bool runnerAI = false;
         bool shooterAI = false;
         protected Rectangle safeBounds;
@@ -53,8 +54,7 @@ namespace Game1
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            runnerText = Content.Load<Texture2D>("player2");
-
+            walls.LoadContent(Content);
             font = Content.Load<SpriteFont>("myFont");
         }
 
@@ -108,6 +108,7 @@ namespace Game1
                     runner.Pos = new Vector2(MathHelper.Clamp(runner.Pos.X,
                     safeBounds.Left, safeBounds.Right - runner.runnerText.Width), MathHelper.Clamp(runner.Pos.Y,
                     safeBounds.Top, safeBounds.Bottom - runner.runnerText.Height));
+                    walls.Update(runner, shooter);
                 }
             }
             base.Update(gameTime);
@@ -124,6 +125,7 @@ namespace Game1
                 {
                     shooter.Draw(spriteBatch);
                     runner.Draw(spriteBatch);
+                    walls.Draw(spriteBatch);
                 }
             }
             spriteBatch.End();

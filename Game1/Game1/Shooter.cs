@@ -57,6 +57,10 @@ namespace Game1
         {
             return bullets;
         }
+        internal List<Sprite> getBulletSprite()
+        {
+            return bulletSprites;
+        }
 
         internal void Draw(SpriteBatch spritebatch)
         {

@@ -89,3 +89,5 @@ H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Sha
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\SharpDX.RawInput.xml
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\SharpDX.Direct3D9.xml
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\obj\x86\Debug\Game1.csprojResolveAssemblyReference.cache
+H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Content\wallTest.xnb
+H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Content\wallTest2.xnb

@@ -20,7 +20,7 @@ namespace Game1
         internal BoundingSphere Hitbox { get; set; }
         internal float Angle;
         // internal Texture2D bulletText { get; set; }
-        internal Bullet(Vector2 Velocity1, bool remov, float Angle1,Vector2 Pos)
+        internal Bullet(Vector2 Velocity1, bool remov, float Angle1, Vector2 Pos)
         {
             Velocity = Velocity1;
             Remove = remov;
@@ -33,11 +33,11 @@ namespace Game1
             Pos += new Vector2((float)(Velocity.X * gametime.ElapsedGameTime.TotalSeconds),
                 (float)(Velocity.Y * gametime.ElapsedGameTime.TotalSeconds));//Changes pos of bullet based on velocity.
 
-            if (Pos.X < -200 || Pos.X > 600) //300 = max window X
+            if (Pos.X < -200 || Pos.X > 1300) //300 = max window X
             {
                 Remove = true;
             }
-            if (Pos.Y < 0)
+            if (Pos.Y < -100)
             {
                 Remove = true;
             }
