@@ -15,6 +15,8 @@ namespace Game1
 
         private List<Texture2D> Textures = new List<Texture2D>();
         private List<Sprite> WallSprites = new List<Sprite>();
+        internal List<Sprite> GetWalls { get { return WallSprites; } }
+        private Vector2 Pos = Vector2.Zero;
         Random random = new Random();
         internal Walls()
         {
@@ -33,31 +35,14 @@ namespace Game1
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    int posY = random.Next(10, 500);
-                    int posX = random.Next(10, 500);
+                    Pos.Y = random.Next(10, 500);
+                    Pos.X = random.Next(10, 500);
                     int texture = random.Next(0, 2);
                     WallSprites.Add(new Sprite(Textures[texture]));
-                    WallSprites[i].Position = new Vector2(posX, posY);
+                    WallSprites[i].Position = Pos;
+                    WallSprites[i].transform = Matrix.CreateTranslation(new Vector3(Pos, 0f));
                 }
             }
-            List<Bullet> bullets = shoot.getBullet();
-            int count = bullets.Count;
-            foreach (Sprite sprite in WallSprites)
-            {
-                foreach (Sprite bullsprite in shoot.getBulletSprite())
-                {
-                    if (bullsprite.CollidesWith(sprite))
-                    {
-                        bullets[count].Remove = true;
-                    }
-                    count++;
-                }
-                if (run.runnerSprite.CollidesWith(sprite))
-                {
-
-                }
-            }
-
         }
         internal void Draw(SpriteBatch spritebatch)
         {
