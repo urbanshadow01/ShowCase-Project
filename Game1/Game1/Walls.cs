@@ -43,6 +43,8 @@ namespace Game1
                     WallSprites[i].transform = Matrix.CreateTranslation(new Vector3(Pos, 0f));
                 }
             }
+
+
         }
         internal void Draw(SpriteBatch spritebatch)
         {
