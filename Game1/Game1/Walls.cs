@@ -29,7 +29,7 @@ namespace Game1
             Textures.Add(Content.Load<Texture2D>("wallTest2"));
         }
         // ScrollingBackground.Update
-        internal void Update(Runner run, Shooter shoot)
+        internal void Update(Runner runner, Shooter shooter)
         {
             if (WallSprites.Count == 0)
             {
@@ -43,7 +43,24 @@ namespace Game1
                     WallSprites[i].transform = Matrix.CreateTranslation(new Vector3(Pos, 0f));
                 }
             }
+            List<Bullet> bullets = shooter.getBullet();
+            
+            foreach (Sprite sprite in WallSprites)
+            {
+                int count = 0;
+                foreach (Sprite bullsprite in shooter.getBulletSprite())
+                {
+                    if (bullsprite.CollidesWith(sprite,true))
+                    {
+                        bullets[count].Remove = true;
+                    }
+                    count++;
+                }
+                if(runner.Pos.Equals(Vector2.Zero))
+                {
 
+                }
+            }
 
         }
         internal void Draw(SpriteBatch spritebatch)
