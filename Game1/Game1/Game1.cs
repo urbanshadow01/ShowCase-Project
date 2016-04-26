@@ -16,7 +16,6 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        internal Texture2D runnerText;
         SpriteFont font;
         Runner runner;
         Shooter shooter;

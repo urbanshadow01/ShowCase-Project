@@ -35,8 +35,8 @@ namespace Game1
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    Pos.Y = random.Next(10, 500);
-                    Pos.X = random.Next(10, 500);
+                    Pos.Y = random.Next(50, 500);
+                    Pos.X = random.Next(100, 700);
                     int texture = random.Next(0, 2);
                     WallSprites.Add(new Sprite(Textures[texture]));
                     WallSprites[i].Position = Pos;
@@ -45,20 +45,20 @@ namespace Game1
             }
             List<Bullet> bullets = shooter.getBullet();
             
-            foreach (Sprite sprite in WallSprites)
+            foreach (Sprite Sprite in WallSprites)
             {
                 int count = 0;
                 foreach (Sprite bullsprite in shooter.getBulletSprite())
                 {
-                    if (bullsprite.CollidesWith(sprite,true))
+                    if (bullsprite.CollidesWith(Sprite,true))
                     {
                         bullets[count].Remove = true;
                     }
                     count++;
                 }
-                if(runner.Pos.Equals(Vector2.Zero))
+                if(runner.runnerSprite.CollidesWith(Sprite,true)) //&& runner.runnerSprite.Bounds.Bottom <= Sprite.Bounds.Top)
                 {
-
+                    runner.SetVelocity = Vector2.Zero;
                 }
             }
 
