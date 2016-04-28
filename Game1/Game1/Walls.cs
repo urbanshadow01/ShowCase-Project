@@ -43,7 +43,8 @@ namespace Game1
                     WallSprites[i].transform = Matrix.CreateTranslation(new Vector3(Pos, 0f));
                 }
             }
-            List<Bullet> bullets = shooter.getBullet();
+
+            /*List<Bullet> bullets = shooter.getBullet();
             
             foreach (Sprite Sprite in WallSprites)
             {
@@ -56,12 +57,56 @@ namespace Game1
                     }
                     count++;
                 }
-                if(runner.runnerSprite.CollidesWith(Sprite,true)) //&& runner.runnerSprite.Bounds.Bottom <= Sprite.Bounds.Top)
+                if(runner.runnerSprite.CollidesWith(Sprite,true))
                 {
                     runner.SetVelocity = Vector2.Zero;
+                } 
+            }*/
+
+        }
+        internal bool OnRight(Sprite sprite)
+        {
+            foreach (Sprite wall in WallSprites)
+            {
+                if (sprite.Bounds.Right <= wall.Bounds.Left && sprite.CollidesWith(wall,true))
+                {
+                    return true;
                 }
             }
-
+            return false;
+        }
+        internal bool OnLeft(Sprite sprite)
+        {
+            foreach (Sprite wall in WallSprites)
+            {
+                if (sprite.Bounds.Left >= wall.Bounds.Right && sprite.CollidesWith(wall, true))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        internal bool OnTop(Sprite sprite)
+        {
+            foreach (Sprite wall in WallSprites)
+            {
+                if (sprite.Bounds.Bottom <= wall.Bounds.Top && sprite.CollidesWith(wall, true))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        internal bool OnBottom(Sprite sprite)
+        {
+            foreach (Sprite wall in WallSprites)
+            {
+                if (sprite.Bounds.Top >= wall.Bounds.Bottom && sprite.CollidesWith(wall,true))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         internal void Draw(SpriteBatch spritebatch)
         {

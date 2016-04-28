@@ -21,32 +21,39 @@ namespace Game1
             runnerSprite = new Sprite(runnerText);
         }
 
-        internal override void Update(GameTime gametime)
+        internal override void Update(GameTime gametime, Walls walls)
         {
             #region movement
             KeyboardState keyboard = Keyboard.GetState();
-            if (keyboard.IsKeyDown(Keys.D))
+            foreach(Sprite wall in walls.GetWalls)
+            {
+                if (runnerSprite.CollidesWith(wall, true))
+                {
+                    Velocity = Vector2.Zero;
+                } 
+            }
+            if (keyboard.IsKeyDown(Keys.D) && !walls.OnRight(runnerSprite))
             {
                 if (Velocity.X < MaxVelocity.X)
                 {
                     Velocity.X += 50;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.A))
+            if (keyboard.IsKeyDown(Keys.A) && !walls.OnLeft(runnerSprite))
             {
                 if (Velocity.X > MinVelocity.X)
                 {
                     Velocity.X -= 50;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.S))
+            if (keyboard.IsKeyDown(Keys.S) && !walls.OnTop(runnerSprite))
             {
                 if (Velocity.Y < MaxVelocity.Y)
                 {
                     Velocity.Y += 50;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.W))
+            if (keyboard.IsKeyDown(Keys.W) && !walls.OnBottom(runnerSprite))
             {
                 if (Velocity.Y > MinVelocity.Y)
                 {
@@ -80,7 +87,7 @@ namespace Game1
             }
             #endregion
         }
-        internal override void Update(GameTime gametime, Shooter shooter) { }
+        internal override void Update(GameTime gametime, Walls walls, Shooter shooter) { }
 
     }
 }

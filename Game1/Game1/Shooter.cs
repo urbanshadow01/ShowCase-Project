@@ -30,8 +30,8 @@ namespace Game1
             shooterText = Content.Load<Texture2D>("player1");
             bulletText = Content.Load<Texture2D>("bullet");
         }
-        internal abstract void Update(GameTime gametime);
-        internal abstract void Update(GameTime gametime, Runner run);
+        internal abstract void Update(GameTime gametime, Walls walls);
+        internal abstract void Update(GameTime gametime, Walls walls, Runner run);
 
         internal Bullet shoot(float Angle)
         {

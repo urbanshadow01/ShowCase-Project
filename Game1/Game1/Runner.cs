@@ -21,8 +21,8 @@ namespace Game1
         {
 
         }
-        internal abstract void Update(GameTime gametime);
-        internal abstract void Update(GameTime gametime, Shooter shooter);
+        internal abstract void Update(GameTime gametime, Walls walls);
+        internal abstract void Update(GameTime gametime, Walls walls, Shooter shooter);
         internal void LoadContent(ContentManager Content)
         {
             runnerText = Content.Load<Texture2D>("player2");

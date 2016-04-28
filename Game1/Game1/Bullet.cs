@@ -31,7 +31,7 @@ namespace Game1
         {
             Pos += new Vector2((float)(Velocity.X * gametime.ElapsedGameTime.TotalSeconds),
                 (float)(Velocity.Y * gametime.ElapsedGameTime.TotalSeconds));//Changes pos of bullet based on velocity.
-
+            
             if (Pos.X < -200 || Pos.X > 1300) //300 = max window X
             {
                 Remove = true;

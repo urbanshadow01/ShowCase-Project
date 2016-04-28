@@ -27,33 +27,33 @@ namespace Game1
             Friction = 2.5f;
         }
 
-        internal override void Update(GameTime gametime)
+        internal override void Update(GameTime gametime, Walls walls)
         {
             shooterSprite.Position = this.Pos;
             #region movement
             KeyboardState keyboard = Keyboard.GetState();
-            if (keyboard.IsKeyDown(Keys.Right))
+            if (keyboard.IsKeyDown(Keys.Right) && !walls.OnRight(shooterSprite))
             {
                 if (Velocity.X < MaxVelocity.X)
                 {
                     Velocity.X += 25;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.Left))
+            if (keyboard.IsKeyDown(Keys.Left) && !walls.OnLeft(shooterSprite))
             {
                 if (Velocity.X > MinVelocity.X)
                 {
                     Velocity.X -= 25;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.Down))
+            if (keyboard.IsKeyDown(Keys.Down) && !walls.OnTop(shooterSprite))
             {
                 if (Velocity.Y < MaxVelocity.Y)
                 {
                     Velocity.Y += 25;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.Up))
+            if (keyboard.IsKeyDown(Keys.Up) && !walls.OnBottom(shooterSprite))
             {
                 if (Velocity.Y > MinVelocity.Y)
                 {
@@ -105,7 +105,18 @@ namespace Game1
 
                 bulletCount++;
             }
-
+            foreach (Sprite Sprite in walls.GetWalls)
+            {
+                bulletCount = 0;
+                foreach (Sprite bullsprite in bulletSprites)
+                {
+                    if (bullsprite.CollidesWith(Sprite, true))
+                    {
+                        bullets[bulletCount].Remove = true;
+                    }
+                    bulletCount++;
+                }
+            }
             for (int i = bullets.Count - 1; i >= 0; i--)
             {
                 Bullet bullet = bullets.ElementAt(i);
@@ -118,9 +129,7 @@ namespace Game1
             #endregion
             //Hitbox = new Circle(new Vector2(shooterText.Bounds.Center.X,shooterText.Bounds.Center.Y),shooterText.Width);
         }
-        internal override void Update(GameTime gametime, Runner run)
-        {
+        internal override void Update(GameTime gametime, Walls walls, Runner run) { }
 
-        }
     }
 }

@@ -26,7 +26,7 @@ namespace Game1
             Friction = 2.5f;
         }
 
-        internal override void Update(GameTime gametime, Runner run)
+        internal override void Update(GameTime gametime, Walls walls, Runner run )
         {
             shooterSprite.Position = this.Pos;
             #region shoot
@@ -64,7 +64,7 @@ namespace Game1
             #endregion
             //Hitbox = new Circle(new Vector2(shooterText.Bounds.Center.X,shooterText.Bounds.Center.Y),shooterText.Width);
         }
-        internal override void Update(GameTime gametime)
+        internal override void Update(GameTime gametime, Walls walls)
         {
 
         }

@@ -85,19 +85,19 @@ namespace Game1
                 {
                     if (runnerAI)
                     {
-                        runner.Update(gameTime, shooter);
+                        runner.Update(gameTime,walls, shooter);
                     }
                     else
                     {
-                        runner.Update(gameTime);
+                        runner.Update(gameTime, walls);
                     }
                     if (shooterAI)
                     {
-                        shooter.Update(gameTime, runner);
+                        shooter.Update(gameTime, walls, runner);
                     }
                     else
                     {
-                        shooter.Update(gameTime);
+                        shooter.Update(gameTime, walls);
                     }
                     //PREVENTS SHOOTER FROM LEAVING RIGHT/LEFT SIDE OF SCREEN
                     shooter.Pos = new Vector2(MathHelper.Clamp(shooter.Pos.X,

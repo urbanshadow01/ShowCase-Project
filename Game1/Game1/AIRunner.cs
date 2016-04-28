@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -23,8 +20,8 @@ namespace Game1
             base.LoadContent(Content);
             runnerSprite = new Sprite(runnerText);
         }
-        internal override void Update(GameTime gametime) { }
-        internal override void Update(GameTime gametime, Shooter shooter)
+        internal override void Update(GameTime gametime, Walls walls) { }
+        internal override void Update(GameTime gametime, Walls walls, Shooter shooter)
         {
             #region movement
             float Angle = (float)(Math.Atan2(shooter.Pos.Y - Pos.Y, shooter.Pos.X - Pos.X));
