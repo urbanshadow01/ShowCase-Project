@@ -25,35 +25,51 @@ namespace Game1
         {
             #region movement
             KeyboardState keyboard = Keyboard.GetState();
-            foreach(Sprite wall in walls.GetWalls)
+            foreach (Sprite wall in walls.GetWalls)
             {
                 if (runnerSprite.CollidesWith(wall, true))
                 {
-                    Velocity = Vector2.Zero;
-                } 
+                    if (runnerSprite.Bounds.Right <= wall.Bounds.Left)
+                    {
+                        Velocity = new Vector2(-50,Velocity.Y);
+                    }
+                    if (runnerSprite.Bounds.Left >= wall.Bounds.Right)
+                    {
+                        Velocity = new Vector2(50, Velocity.Y);
+                    }
+                    if (runnerSprite.Bounds.Bottom <= wall.Bounds.Top)
+                    {
+                        Velocity = new Vector2(Velocity.X, -50);
+                    }
+                    if (runnerSprite.Bounds.Top >= wall.Bounds.Bottom)
+                    {
+                        Velocity = new Vector2(Velocity.X, 50);
+                    }
+                    Velocity = -Velocity;
+                }
             }
-            if (keyboard.IsKeyDown(Keys.D) && !walls.OnRight(runnerSprite))
+            if (keyboard.IsKeyDown(Keys.D))
             {
                 if (Velocity.X < MaxVelocity.X)
                 {
                     Velocity.X += 50;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.A) && !walls.OnLeft(runnerSprite))
+            if (keyboard.IsKeyDown(Keys.A))
             {
                 if (Velocity.X > MinVelocity.X)
                 {
                     Velocity.X -= 50;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.S) && !walls.OnTop(runnerSprite))
+            if (keyboard.IsKeyDown(Keys.S))
             {
                 if (Velocity.Y < MaxVelocity.Y)
                 {
                     Velocity.Y += 50;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.W) && !walls.OnBottom(runnerSprite))
+            if (keyboard.IsKeyDown(Keys.W))
             {
                 if (Velocity.Y > MinVelocity.Y)
                 {

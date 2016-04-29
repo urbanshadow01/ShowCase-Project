@@ -32,28 +32,28 @@ namespace Game1
             shooterSprite.Position = this.Pos;
             #region movement
             KeyboardState keyboard = Keyboard.GetState();
-            if (keyboard.IsKeyDown(Keys.Right) && !walls.OnRight(shooterSprite))
+            if (keyboard.IsKeyDown(Keys.Right))
             {
                 if (Velocity.X < MaxVelocity.X)
                 {
                     Velocity.X += 25;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.Left) && !walls.OnLeft(shooterSprite))
+            if (keyboard.IsKeyDown(Keys.Left))
             {
                 if (Velocity.X > MinVelocity.X)
                 {
                     Velocity.X -= 25;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.Down) && !walls.OnTop(shooterSprite))
+            if (keyboard.IsKeyDown(Keys.Down))
             {
                 if (Velocity.Y < MaxVelocity.Y)
                 {
                     Velocity.Y += 25;
                 }
             }
-            if (keyboard.IsKeyDown(Keys.Up) && !walls.OnBottom(shooterSprite))
+            if (keyboard.IsKeyDown(Keys.Up))
             {
                 if (Velocity.Y > MinVelocity.Y)
                 {

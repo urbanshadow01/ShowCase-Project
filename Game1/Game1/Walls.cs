@@ -64,48 +64,36 @@ namespace Game1
             }*/
 
         }
-        internal bool OnRight(Sprite sprite)
+        internal bool OnRight(Sprite sprite, Sprite wall)
         {
-            foreach (Sprite wall in WallSprites)
+            if (sprite.Bounds.Right <= wall.Bounds.Left)
             {
-                if (sprite.Bounds.Right <= wall.Bounds.Left && sprite.CollidesWith(wall,true))
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         }
-        internal bool OnLeft(Sprite sprite)
+        internal bool OnLeft(Sprite sprite, Sprite wall)
         {
-            foreach (Sprite wall in WallSprites)
-            {
-                if (sprite.Bounds.Left >= wall.Bounds.Right && sprite.CollidesWith(wall, true))
+                if (sprite.Bounds.Left >= wall.Bounds.Right)
                 {
                     return true;
                 }
-            }
             return false;
         }
-        internal bool OnTop(Sprite sprite)
+        internal bool OnTop(Sprite sprite, Sprite wall)
         {
-            foreach (Sprite wall in WallSprites)
-            {
-                if (sprite.Bounds.Bottom <= wall.Bounds.Top && sprite.CollidesWith(wall, true))
+                if (sprite.Bounds.Bottom <= wall.Bounds.Top)
                 {
                     return true;
                 }
-            }
             return false;
         }
-        internal bool OnBottom(Sprite sprite)
+        internal bool OnBottom(Sprite sprite, Sprite wall)
         {
-            foreach (Sprite wall in WallSprites)
-            {
-                if (sprite.Bounds.Top >= wall.Bounds.Bottom && sprite.CollidesWith(wall,true))
+                if (sprite.Bounds.Top >= wall.Bounds.Bottom)
                 {
                     return true;
                 }
-            }
             return false;
         }
         internal void Draw(SpriteBatch spritebatch)
