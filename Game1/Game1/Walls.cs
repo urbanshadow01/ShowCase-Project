@@ -16,7 +16,6 @@ namespace Game1
         private List<Texture2D> Textures = new List<Texture2D>();
         private List<Sprite> WallSprites = new List<Sprite>();
         internal List<Sprite> GetWalls { get { return WallSprites; } }
-        private Vector2 Pos = Vector2.Zero;
         Random random = new Random();
         internal Walls()
         {
@@ -35,6 +34,7 @@ namespace Game1
             {
                 for (int i = 0; i < 3; i++)
                 {
+                    Vector2 Pos;
                     Pos.Y = random.Next(50, 500);
                     Pos.X = random.Next(100, 700);
                     int texture = random.Next(0, 2);
@@ -63,38 +63,6 @@ namespace Game1
                 } 
             }*/
 
-        }
-        internal bool OnRight(Sprite sprite, Sprite wall)
-        {
-            if (sprite.Bounds.Right <= wall.Bounds.Left)
-            {
-                return true;
-            }
-            return false;
-        }
-        internal bool OnLeft(Sprite sprite, Sprite wall)
-        {
-                if (sprite.Bounds.Left >= wall.Bounds.Right)
-                {
-                    return true;
-                }
-            return false;
-        }
-        internal bool OnTop(Sprite sprite, Sprite wall)
-        {
-                if (sprite.Bounds.Bottom <= wall.Bounds.Top)
-                {
-                    return true;
-                }
-            return false;
-        }
-        internal bool OnBottom(Sprite sprite, Sprite wall)
-        {
-                if (sprite.Bounds.Top >= wall.Bounds.Bottom)
-                {
-                    return true;
-                }
-            return false;
         }
         internal void Draw(SpriteBatch spritebatch)
         {

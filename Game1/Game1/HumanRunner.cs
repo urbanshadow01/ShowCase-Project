@@ -25,29 +25,7 @@ namespace Game1
         {
             #region movement
             KeyboardState keyboard = Keyboard.GetState();
-            foreach (Sprite wall in walls.GetWalls)
-            {
-                if (runnerSprite.CollidesWith(wall, true))
-                {
-                    if (runnerSprite.Bounds.Right <= wall.Bounds.Left)
-                    {
-                        Velocity = new Vector2(-50,Velocity.Y);
-                    }
-                    if (runnerSprite.Bounds.Left >= wall.Bounds.Right)
-                    {
-                        Velocity = new Vector2(50, Velocity.Y);
-                    }
-                    if (runnerSprite.Bounds.Bottom <= wall.Bounds.Top)
-                    {
-                        Velocity = new Vector2(Velocity.X, -50);
-                    }
-                    if (runnerSprite.Bounds.Top >= wall.Bounds.Bottom)
-                    {
-                        Velocity = new Vector2(Velocity.X, 50);
-                    }
-                    Velocity = -Velocity;
-                }
-            }
+
             if (keyboard.IsKeyDown(Keys.D))
             {
                 if (Velocity.X < MaxVelocity.X)
@@ -77,6 +55,41 @@ namespace Game1
                 }
             }
 
+            foreach (Sprite wall in walls.GetWalls)
+            {
+
+                if (wall.CollidesWith(runnerSprite, true))
+                {
+                    Velocity = Vector2.Zero;
+                    if (runnerSprite.Bounds.Right > (wall.Bounds.Left))
+                    {
+                        Pos = new Vector2(wall.Bounds.Left-2, Pos.Y);
+                        runnerSprite.Position = this.Pos;
+                        continue;
+                    }
+
+                    if (runnerSprite.Bounds.Left < (wall.Bounds.Right))
+                    {
+                        Pos = new Vector2(wall.Bounds.Right, Pos.Y);
+                        runnerSprite.Position = this.Pos;
+                        continue;
+                    }
+
+                    if (runnerSprite.Bounds.Bottom < (wall.Bounds.Top))
+                    {
+                        Pos = new Vector2(Pos.X, wall.Bounds.Top);
+                        runnerSprite.Position = this.Pos;
+                        continue;
+                    }
+
+                    if (runnerSprite.Bounds.Top < (wall.Bounds.Bottom))
+                    {
+                        Pos = new Vector2(Pos.X, wall.Bounds.Bottom);
+                        runnerSprite.Position = this.Pos;
+                        continue;
+                    }
+                }
+            }
 
             Pos += new Vector2((float)(Velocity.X * gametime.ElapsedGameTime.TotalSeconds),
                  (float)(Velocity.Y * gametime.ElapsedGameTime.TotalSeconds));

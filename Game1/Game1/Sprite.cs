@@ -162,8 +162,8 @@ namespace Game1
             get
             {
                 return new Rectangle(
-                    (int)Position.X - Texture.Width,
-                    (int)Position.Y - Texture.Height,
+                    (int)Position.X,
+                    (int)Position.Y,
                     Texture.Width,
                     Texture.Height);
             }
