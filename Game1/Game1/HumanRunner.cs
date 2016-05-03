@@ -60,34 +60,7 @@ namespace Game1
 
                 if (wall.CollidesWith(runnerSprite, true))
                 {
-                    Velocity = Vector2.Zero;
-                    if (runnerSprite.Bounds.Right > (wall.Bounds.Left))
-                    {
-                        Pos = new Vector2(wall.Bounds.Left-2, Pos.Y);
-                        runnerSprite.Position = this.Pos;
-                        continue;
-                    }
-
-                    if (runnerSprite.Bounds.Left < (wall.Bounds.Right))
-                    {
-                        Pos = new Vector2(wall.Bounds.Right, Pos.Y);
-                        runnerSprite.Position = this.Pos;
-                        continue;
-                    }
-
-                    if (runnerSprite.Bounds.Bottom < (wall.Bounds.Top))
-                    {
-                        Pos = new Vector2(Pos.X, wall.Bounds.Top);
-                        runnerSprite.Position = this.Pos;
-                        continue;
-                    }
-
-                    if (runnerSprite.Bounds.Top < (wall.Bounds.Bottom))
-                    {
-                        Pos = new Vector2(Pos.X, wall.Bounds.Bottom);
-                        runnerSprite.Position = this.Pos;
-                        continue;
-                    }
+                    Velocity = -Velocity;
                 }
             }
 

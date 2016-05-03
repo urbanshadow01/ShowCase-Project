@@ -25,18 +25,19 @@ namespace Game1
         {
             #region movement
             float Angle = (float)(Math.Atan2(shooter.Pos.Y - Pos.Y, shooter.Pos.X - Pos.X));
-            float Speed = 100; 
+            float Speed = 100;
             float velocityX = (float)(Math.Cos(Angle) * Speed);
             float velocityY = (float)(Math.Sin(Angle) * Speed);
             Velocity = new Vector2(velocityX, velocityY);
+
             #region dodging
             foreach (Bullet bull in shooter.getBullet())
             {
-                if (bull.Pos.Y + 20 <= Pos.Y)
+                if (bull.Pos.Y + 30 <= Pos.Y)
                 {
                     continue;
                 }
-                if((bull.Pos.X - Pos.X) <= 100)
+                if ((bull.Pos.X - Pos.X) <= 100)
                 {
                     if (bull.GetVelocity.X >= 0)
                     {
@@ -47,10 +48,40 @@ namespace Game1
                     {
                         Velocity.X += 100;
                         continue;
-                    }                   
+                    }
                 }
             }
             #endregion
+            foreach (Sprite wall in walls.GetWalls)
+            {
+
+                if (wall.CollidesWith(runnerSprite, true))
+                {
+                    Velocity = -Velocity;
+                }
+                if (runnerSprite.Position.Y > shooter.Pos.Y)
+                {
+                    if (wall.Position.X < runnerSprite.Position.X)
+                    {
+                        Velocity.Y += -100;
+                    }
+                    if (wall.Position.Y < runnerSprite.Position.Y)
+                    {
+                        Velocity.X += 100;
+                    }
+                }
+                if (runnerSprite.Position.Y < shooter.Pos.Y)
+                {
+                    if (wall.Position.X < runnerSprite.Position.X)
+                    {
+                        Velocity.Y += 100;
+                    }
+                    if (wall.Position.Y < runnerSprite.Position.Y)
+                    {
+                        Velocity.X += -100;
+                    }
+                }
+            }
             Pos += new Vector2((float)(Velocity.X * gametime.ElapsedGameTime.TotalSeconds),
                  (float)(Velocity.Y * gametime.ElapsedGameTime.TotalSeconds));
             runnerSprite.Position = Pos;

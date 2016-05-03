@@ -42,28 +42,31 @@ namespace Game1
                     WallSprites[i].Position = Pos;
                     WallSprites[i].transform = Matrix.CreateTranslation(new Vector3(Pos, 0f));
                 }
-            }
-
-            /*List<Bullet> bullets = shooter.getBullet();
-            
-            foreach (Sprite Sprite in WallSprites)
-            {
-                int count = 0;
-                foreach (Sprite bullsprite in shooter.getBulletSprite())
-                {
-                    if (bullsprite.CollidesWith(Sprite,true))
-                    {
-                        bullets[count].Remove = true;
-                    }
-                    count++;
-                }
-                if(runner.runnerSprite.CollidesWith(Sprite,true))
-                {
-                    runner.SetVelocity = Vector2.Zero;
-                } 
-            }*/
-
+            }  
         }
+        /*internal bool OnRight(Player player)
+        {
+            if(player.GetVelocity.X > 0)
+            {
+                if()
+                {
+
+                }
+            }
+            return false;
+        }
+        internal bool OnLeft(Player player)
+        {
+            return false;
+        }
+        internal bool OnTop(Player player)
+        {
+            return false;
+        }
+        internal bool OnBottom(Player player)
+        {
+            return false;
+        } */
         internal void Draw(SpriteBatch spritebatch)
         {
             foreach (Sprite wall in WallSprites)

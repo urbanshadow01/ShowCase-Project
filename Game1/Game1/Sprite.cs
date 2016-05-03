@@ -32,7 +32,13 @@ namespace Game1
             }
             else
             {
-                return transCollidesPixels(transform, this, other);
+                if (this.TransBounds(this.Bounds, transform).Intersects(other.TransBounds(other.Bounds, transform)))
+                {
+                    return transCollidesPixels(transform, this, other);
+                } else
+                {
+                    return false;
+                }
             }
         }
 

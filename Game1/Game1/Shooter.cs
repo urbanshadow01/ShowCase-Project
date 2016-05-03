@@ -35,7 +35,7 @@ namespace Game1
 
         internal Bullet shoot(float Angle)
         {
-            double bulletSpeed = 100; // to be decided later
+            double bulletSpeed = 200; // to be decided later
             float velocityX = (float)(Math.Cos(Angle) * bulletSpeed);
             float velocityY = (float)(Math.Sin(Angle) * bulletSpeed);
 

@@ -60,6 +60,14 @@ namespace Game1
                     Velocity.Y -= 25;
                 }
             }
+            foreach (Sprite wall in walls.GetWalls)
+            {
+
+                if (wall.CollidesWith(this.shooterSprite, true))
+                {
+                    Velocity = -Velocity;
+                }
+            }
             Pos += new Vector2((float)(Velocity.X * gametime.ElapsedGameTime.TotalSeconds),
      (float)(Velocity.Y * gametime.ElapsedGameTime.TotalSeconds));
             shooterSprite.Position = this.Pos;
