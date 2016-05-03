@@ -16,6 +16,7 @@ namespace Game1
         private MouseState oldState;
         private bool OnMenu = false;
         internal bool GetIsMenu { get { return OnMenu; } }
+        internal bool SetIsMenu { set { OnMenu = value; } }
         internal void LoadContent(ContentManager Content)
         {
 
@@ -23,7 +24,10 @@ namespace Game1
 
         internal void Update(GameTime gameTime, int menuOption)
         {
-            MouseState mouse = Mouse.GetState();
+            if (OnMenu)
+            {
+                MouseState mouse = Mouse.GetState();
+            }
         }
 
         internal void Draw(SpriteBatch spriteBatch)
