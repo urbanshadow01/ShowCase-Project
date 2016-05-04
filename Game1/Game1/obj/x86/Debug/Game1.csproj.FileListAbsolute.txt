@@ -61,7 +61,6 @@ H:\2015-2016\_Showcase\Game1\Game1\bin\Windows\Debug\MonoGame.Framework.Net.xml
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\obj\x86\Debug\Game1.exe
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\obj\x86\Debug\Game1.pdb
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Content\bullet.xnb
-H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Content\myFont.xnb
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Content\player1.xnb
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Content\player2.xnb
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Game1.exe
@@ -91,3 +90,4 @@ H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Sha
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\obj\x86\Debug\Game1.csprojResolveAssemblyReference.cache
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Content\wallTest.xnb
 H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Content\wallTest2.xnb
+H:\Git_Repos\showCaseProject\Show-Case-Project\Game1\Game1\bin\Windows\Debug\Content\NewSpriteFont.xnb

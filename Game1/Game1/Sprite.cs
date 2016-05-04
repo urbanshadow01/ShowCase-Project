@@ -168,8 +168,8 @@ namespace Game1
             get
             {
                 return new Rectangle(
-                    (int)Position.X,
-                    (int)Position.Y,
+                    (int)Position.X/2,
+                    (int)Position.Y/2,
                     Texture.Width,
                     Texture.Height);
             }
@@ -183,11 +183,11 @@ namespace Game1
             Vector2 leftBottom = new Vector2(rectangle.Left, rectangle.Bottom);
             Vector2 rightBottom = new Vector2(rectangle.Right, rectangle.Bottom);
 
-            // Transform all four corners into work space
+          /*  // Transform all four corners into work space
             Vector2.Transform(ref leftTop, ref transform, out leftTop);
             Vector2.Transform(ref rightTop, ref transform, out rightTop);
             Vector2.Transform(ref leftBottom, ref transform, out leftBottom);
-            Vector2.Transform(ref rightBottom, ref transform, out rightBottom);
+            Vector2.Transform(ref rightBottom, ref transform, out rightBottom); */
 
             // Find the minimum and maximum extents of the rectangle in world space
             Vector2 min = Vector2.Min(Vector2.Min(leftTop, rightTop),

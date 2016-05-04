@@ -12,11 +12,11 @@ namespace Game1
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+    internal enum MenuStates {Main , GameType, Quit, Credits, GameOver, Playing};
     internal class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SpriteFont font;
         Runner runner;
         Shooter shooter;
         Menu menu = new Menu();
@@ -54,7 +54,6 @@ namespace Game1
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             walls.LoadContent(Content);
-            font = Content.Load<SpriteFont>("myFont");
         }
 
         protected override void UnloadContent()
@@ -65,11 +64,6 @@ namespace Game1
 
         protected override void Update(GameTime gameTime)
         {
-            //            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            //          myBackground.Update(elapsed * 100);
-
-
             if (Keyboard.GetState().IsKeyDown(Keys.R))
             {
                 runner = new HumanRunner(Content);
@@ -118,7 +112,7 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            if (!menu.GetIsMenu)
+            if (menu.State == MenuStates.Playing)
             {
                 if (shooter != null || runner != null)
                 {

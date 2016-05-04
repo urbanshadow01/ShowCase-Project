@@ -46,12 +46,6 @@
 /processorParam:TextureFormat=Color
 /build:bullet.png
 
-#begin myFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:myFont.spritefont
-
 #begin wallTest.png
 /importer:TextureImporter
 /processor:TextureProcessor
