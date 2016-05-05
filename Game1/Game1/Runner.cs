@@ -36,7 +36,7 @@ namespace Game1
         }
         internal bool Win(Shooter shooter)
         {
-            if (runnerSprite.CollidesWith(shooter.shooterSprite, false))
+            if (runnerSprite.CollidesWith(shooter.shooterSprite, true))
             {
                 return true;
             }
