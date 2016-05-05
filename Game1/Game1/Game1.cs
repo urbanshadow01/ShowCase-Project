@@ -12,7 +12,7 @@ namespace Game1
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    internal enum MenuStates {Main , GameType, Quit, Credits, GameOver, Playing};
+    internal enum MenuStates { Main, PlayerAmount, PlayerType, Quit, Credits, GameOver, Playing, Instructions };
     internal class Game1 : Game
     {
         GraphicsDeviceManager graphics;
@@ -64,45 +64,93 @@ namespace Game1
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
+
+            if (menu.State == MenuStates.Playing)
             {
-                runner = new HumanRunner(Content);
-                shooter = new HumanShooter(Content);
-            }
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                Exit();
-            }
-            if (runner != null || shooter != null)
-            {
-                if (!runner.Win(shooter) && !shooter.Win(runner))
+                #region FirstStart
+                if(!menu.gameStarted)
                 {
-                    if (runnerAI)
+                    if (menu.playerAmount == 2)
                     {
-                        runner.Update(gameTime,walls, shooter);
+                        runner = new HumanRunner(Content);
+                        shooter = new HumanShooter(Content);
                     }
-                    else
+                    else if (menu.playerAmount != 2)
                     {
-                        runner.Update(gameTime, walls);
+                        if (menu.playerType == 1)
+                        {
+                            runner = new AIRunner(Content);
+                            shooter = new HumanShooter(Content);
+                        }
+                        else
+                        {
+                            runner = new HumanRunner(Content);
+                            shooter = new AIShooter(Content);
+                        }
                     }
-                    if (shooterAI)
-                    {
-                        shooter.Update(gameTime, walls, runner);
-                    }
-                    else
-                    {
-                        shooter.Update(gameTime, walls);
-                    }
-                    //PREVENTS SHOOTER FROM LEAVING RIGHT/LEFT SIDE OF SCREEN
-                    shooter.Pos = new Vector2(MathHelper.Clamp(shooter.Pos.X,
-                    safeBounds.Left, safeBounds.Right - shooter.shooterText.Width), MathHelper.Clamp(shooter.Pos.Y,
-                    safeBounds.Top, safeBounds.Bottom - shooter.shooterText.Height));
-                    //PREVENTS RUNNER FROM LEAVING RIGHT/LEFT SIDE OF SCREEN
-                    runner.Pos = new Vector2(MathHelper.Clamp(runner.Pos.X,
-                    safeBounds.Left, safeBounds.Right - runner.runnerText.Width), MathHelper.Clamp(runner.Pos.Y,
-                    safeBounds.Top, safeBounds.Bottom - runner.runnerText.Height));
-                    walls.Update(runner, shooter);
+                    menu.gameStarted = true;
                 }
+                #endregion
+                #region Restart
+                if (Keyboard.GetState().IsKeyDown(Keys.R) && menu.State == MenuStates.GameOver)
+                {
+                    if (menu.playerAmount == 2)
+                    {
+                        runner = new HumanRunner(Content);
+                        shooter = new HumanShooter(Content);
+                    }
+                    else
+                    {
+                        if (menu.playerType == 1)
+                        {
+                            runner = new AIRunner(Content);
+                            shooter = new HumanShooter(Content);
+                        }
+                        else
+                        {
+                            runner = new HumanRunner(Content);
+                            shooter = new AIShooter(Content);
+                        }
+                    }
+                }
+                #endregion
+                if (menu.State == MenuStates.Quit || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    Exit();
+                }
+                #region update
+                if (runner != null && shooter != null)
+                {
+                    if (!runner.Win(shooter) && !shooter.Win(runner))
+                    {
+                        if (runnerAI)
+                        {
+                            runner.Update(gameTime, walls, shooter);
+                        }
+                        else
+                        {
+                            runner.Update(gameTime, walls);
+                        }
+                        if (shooterAI)
+                        {
+                            shooter.Update(gameTime, walls, runner);
+                        }
+                        else
+                        {
+                            shooter.Update(gameTime, walls);
+                        }
+                        //PREVENTS SHOOTER FROM LEAVING RIGHT/LEFT SIDE OF SCREEN
+                        shooter.Pos = new Vector2(MathHelper.Clamp(shooter.Pos.X,
+                        safeBounds.Left, safeBounds.Right - shooter.shooterText.Width), MathHelper.Clamp(shooter.Pos.Y,
+                        safeBounds.Top, safeBounds.Bottom - shooter.shooterText.Height));
+                        //PREVENTS RUNNER FROM LEAVING RIGHT/LEFT SIDE OF SCREEN
+                        runner.Pos = new Vector2(MathHelper.Clamp(runner.Pos.X,
+                        safeBounds.Left, safeBounds.Right - runner.runnerText.Width), MathHelper.Clamp(runner.Pos.Y,
+                        safeBounds.Top, safeBounds.Bottom - runner.runnerText.Height));
+                        walls.Update(runner, shooter);
+                    }
+                }
+                #endregion
             }
             base.Update(gameTime);
         }
@@ -120,6 +168,10 @@ namespace Game1
                     runner.Draw(spriteBatch);
                     walls.Draw(spriteBatch);
                 }
+            }
+            else
+            {
+                menu.Draw(spriteBatch);
             }
             spriteBatch.End();
             base.Draw(gameTime);
